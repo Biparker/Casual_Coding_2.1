@@ -2,9 +2,12 @@
 
 <div class="jumbotron text-center">
   <div class="container">
-    <i class="fas fa-key fa-6x"></i>
-    <h1 class="display-3">Here is the Project</h1>
-    <p class="projects-text">Collaboration is the Key</p>
+   <h1 class="display-3">Here are our Project(s)</h1>
+    <% usersWithProjects.forEach(function(user) { %>
+    <p class = "project-text"><%=user.project%></p>
+    <%}) %>
+
+
     <hr>
     
     <a class="btn btn-light btn-lg" href="/logout" role="button">Log Out</a>

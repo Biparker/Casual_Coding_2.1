@@ -1,10 +1,10 @@
 
 body {
-  background-color: #E8ECEF;
-}
+  background-color: #deb887;
+   }
 
 .centered {
-    padding-top: 200px;
+    padding-top: 100px;
     text-align: center;
 }
 
@@ -14,3 +14,11 @@ body {
   color: #fff;
   background-color: #000;
 }
+
+p { background-color: #808000; font-weight:bold;}
+
+#logo { height: 100px; width: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+   }
