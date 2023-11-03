@@ -3,13 +3,18 @@
 <div class="container">
   <div class="jumbotron centered">
    <h1 class="display-3">Member Projects</h1>
-    <p class="project-text">Share Information on Your Projects</p>
+    <p class="project-text">Describe Your Projects</p>
 
     <form action="/submit" method="POST">
 
       <div class="form-group">
-        <input type="text" class="form-control text-center" name="project" placeholder="Details of Your Projects">
+        <input type="text" class="form-control text-center" name="email" placeholder="Project Owner">
+        <input type="text" class="form-control text-center" name="project" placeholder="Information on Your Projects">
+        <input type="text" class="form-control text-center" name="percent_done" placeholder="Percent Completed">
       </div>
+
+     
+
       <button type="submit" class="btn btn-dark">Submit</button>
     </form>
 

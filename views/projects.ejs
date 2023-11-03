@@ -2,10 +2,29 @@
 
 <div class="jumbotron text-center">
   <div class="container">
-   <h1 class="display-3">Here are our Project(s)</h1>
+   <h2 class="display-3">Casual Coding Project(s)</h2>
     <% usersWithProjects.forEach(function(user) { %>
-    <p class = "project-text"><%=user.project%></p>
-    <%}) %>
+     <%}) %>
+         <table style ="width: 100%" >
+      <thead>
+        <tr>
+          <th>Owner</th>
+          <th>Project</th>
+          <th>Percent_done</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% usersWithProjects.forEach(function(user) { %>
+          <tr>
+            <td><%= user.email %></td>
+            <td><%= user.project %></td>
+            <td><%= user.percent_done %></td>
+          </tr>
+        <% }); %>
+
+      </tbody>
+    </table>
+
 
 
     <hr>

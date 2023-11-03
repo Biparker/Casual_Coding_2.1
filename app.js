@@ -1,4 +1,3 @@
-
 require ("dotenv"). config();
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -33,7 +32,8 @@ mongoose.connect("mongodb://localhost:27017/userDB");
 const userSchema = new mongoose.Schema({
     email: String,
     password: String,
-    project: String
+    project: String,
+    percent_done: String
 });
 
 userSchema.plugin(passportLocalMongoose);
@@ -49,16 +49,16 @@ app.get("/", function(req, res) {
     res.render("register");
   });
    
-  app.get("/login", function(req, res) {
+app.get("/login", function(req, res) {
     res.render("login");
   });
    
-  app.get("/register", function(req, res) {
+app.get("/register", function(req, res) {
     res.render("register");
   });
    
     
-  app.get("/submit", function(req, res) {
+app.get("/submit", function(req, res) {
     if (req.isAuthenticated()) {
       res.render("submit");
     } else {
@@ -66,19 +66,18 @@ app.get("/", function(req, res) {
     }
   });
 
-  app.get("/projects",function(req,res){
+app.get("/projects",function(req,res){
     User.find({"project":{$ne:null}})
     .then(function (foundUsers) {
       res.render("projects",{usersWithProjects:foundUsers});
-      })
+    })
     .catch(function (err) {
-      console.log(err);
+        console.log(err);
       })
-});
+  });
 
 
-
-  app.get("/logout", function(req, res) {
+app.get("/logout", function(req, res) {
     req.logout(function(err) {
       if (err) {
         console.log(err);
@@ -89,9 +88,8 @@ app.get("/", function(req, res) {
    
   
   
-   
-   
-  app.post("/register", function(req, res) {
+      
+app.post("/register", function(req, res) {
    
     User.register({username: req.body.username}, req.body.password, function(err, user) {
       if (err) {
@@ -99,14 +97,14 @@ app.get("/", function(req, res) {
         res.redirect("/register");
       } else {
         passport.authenticate("local")(req, res, function() {
-          res.redirect("/projects");
+          res.redirect("/login");
         });
       }
     });
    
   });
    
-  app.post("/login", function(req, res) {
+app.post("/login", function(req, res) {
    
     const user = new User({
       username: req.body.username,
@@ -127,12 +125,14 @@ app.get("/", function(req, res) {
   });
   
 
-  app.post("/submit", function (req, res) {
+app.post("/submit", function (req, res) {
     console.log(req.user);
     User.findById(req.user)
       .then(foundUser => {
         if (foundUser) {
           foundUser.project = req.body.project;
+          foundUser.email = req.body.email;
+          foundUser.percent_done = req.body.percent_done;
           return foundUser.save();
         }
         return null;
@@ -143,8 +143,12 @@ app.get("/", function(req, res) {
       .catch(err => {
         console.log(err);
       });
-});
+  });
    
-  app.listen(3000, function() {
+  
+  
+  
+app.listen(3000, function() {
     console.log("Server on Port 3000...");
   });
+

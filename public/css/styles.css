@@ -22,3 +22,8 @@ p { background-color: #808000; font-weight:bold;}
     margin-left: auto;
     margin-right: auto;
    }
+table {margin-left:auto; margin-right:auto;}
+
+tbody {margin-left:auto; margin-right:auto;
+  border-bottom: 1px solid #ddd;
+}
