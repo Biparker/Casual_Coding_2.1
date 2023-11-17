@@ -5,6 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
+    "prettier-format": "prettier --config .prettierrc.js 'src/**/*.ts' --write"
   },
   "keywords": [],
   "author": "",
@@ -24,4 +25,6 @@
     "passport-local-mongoose": "^8.0.0"
   },
   "description": ""
-}
+},
+
+
