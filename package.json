@@ -1,5 +1,9 @@
-//"prettier-format": "prettier --config .prettierrc.js 'src/**/*.ts' --write"
-
+{
+  "trailingComma": "es5",
+  "tabWidth": 4,
+  "semi": false,
+  "singleQuote": true
+}
 {
   "name": "secrets---starting-code",
   "version": "1.0.0",
