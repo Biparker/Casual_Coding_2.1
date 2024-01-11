@@ -1,17 +1,11 @@
 {
-  "trailingComma": "es5",
-  "tabWidth": 4,
-  "semi": false,
-  "singleQuote": true
-},
-{
   "name": "secrets---starting-code",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
-    },
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -29,7 +23,7 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^8.0.0"
   },
-  "description": ""
-},
-
+  "description": "This repository contains development code intended for the Member Profile Website of the Casual Coding Group.",
+  "devDependencies": {}
+}
 
