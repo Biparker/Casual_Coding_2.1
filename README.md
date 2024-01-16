@@ -14,11 +14,7 @@ From the root directory run ```npm install``` to install all of the dependencies
 
 Remember to create a .env file and add ```node_modules``` along with any other values you might need.
 
-<!-- To Start the app in development mode enter ```npm run dev``` in the terminal. -->
-To run the program use the command ```node app.js``` in the terminal.
-Enter ```http://localhost:3000``` on the browser to render the page. 
-To use the site, register as a user by entering credentials on the login page (email and password) and click submit to enter project attributes. 
-All users can view the list of projects on the projects page. Currently, the database has three test projects shown on the projects page.
+A rudimentary deployment of the website is on the railway platform and can be accessed by https://casualcoding21-production.up.railway.app/.  
 
 ## Tech Stack
 [mongoose]: https://mongoosejs.com/
