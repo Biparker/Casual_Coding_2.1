@@ -38,8 +38,9 @@ const userSchema = new mongoose.Schema({
     email: String,
     password: String,
     project: String,
-    percent_done: String
-});
+    percent_done: String,
+    description: String
+    });
 
 userSchema.plugin(passportLocalMongoose);
 
@@ -49,6 +50,7 @@ passport.use(User.createStrategy());
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
 
 app.get("/", function(req, res) {
     res.render("register");
@@ -71,17 +73,29 @@ app.get("/submit", function(req, res) {
     }
   });
 
-app.get("/projects",function(req,res){
-    User.find({"project":{$ne:null}})
-    .then(function (foundUsers) {
-      res.render("projects",{usersWithProjects:foundUsers});
+
+app.get(["/project_tables", "/project_cards"], function(req, res) {
+  User.find({ "project": { $ne: null } })
+    .then(function(foundUsers) {
+      if (req.url === "/project_tables") {
+        // Render users in table format
+        res.render("project_tables", { usersWithProjects: foundUsers });
+      } else if (req.url === "/project_cards") {
+        // Render users in card format
+        res.render("project_cards", { usersWithProjects: foundUsers });
+      } else {
+        // Handle unexpected URL (optional)
+        res.status(404).send("Not Found");
+      }
     })
-    .catch(function (err) {
-        console.log(err);
-      })
-  });
+    .catch(function(err) {
+      console.error(err);
+      res.status(500).send("Internal Server Error");
+    });
+});
 
 
+  
 app.get("/logout", function(req, res) {
     req.logout(function(err) {
       if (err) {
@@ -91,8 +105,7 @@ app.get("/logout", function(req, res) {
     res.redirect("/");
   });
    
-  
-  
+ 
       
 app.post("/register", function(req, res) {
    
@@ -121,7 +134,7 @@ app.post("/login", function(req, res) {
         console.log(err);
       } else {
         passport.authenticate("local")(req, res, function() {
-          res.redirect("/projects");
+          res.redirect("/project_tables");
         });
    
       }
@@ -129,8 +142,9 @@ app.post("/login", function(req, res) {
    
   });
   
-
-app.post("/submit", function (req, res) {
+  
+  
+  app.post("/submit", function (req, res) {
     console.log(req.user);
     User.findById(req.user)
       .then(foundUser => {
@@ -138,20 +152,18 @@ app.post("/submit", function (req, res) {
           foundUser.project = req.body.project;
           foundUser.email = req.body.email;
           foundUser.percent_done = req.body.percent_done;
+          foundUser.description = req.body.description;
           return foundUser.save();
         }
         return null;
       })
       .then(() => {
-        res.redirect("/projects");
+        res.redirect("/project_tables");
       })
       .catch(err => {
         console.log(err);
       });
   });
-   
-  
-  
   
 /// app.listen(3000, function() {
 //    console.log("Server on Port 3000...");
