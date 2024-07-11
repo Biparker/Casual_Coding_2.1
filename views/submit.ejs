@@ -1,0 +1,25 @@
+<%- include('partials/header') %>
+
+<div class="container">
+  <div class="jumbotron centered">
+   <h1 class="display-3">Member Projects</h1>
+    <p class="project-text">Project Features</p>
+
+    <form action="/submit" method="POST">
+
+      <div class="form-group">
+        <input type="text" class="form-control text-center" name="email" placeholder="Project Owner">
+        <input type="text" class="form-control text-center" name="project" placeholder=" Name of Your Projects">
+        <input type="text" class="form-control text-center" name="percent_done" placeholder="Percent Completed">
+        <input type="text" class="form-control text-center" name="description" placeholder="Description">
+      </div>
+
+     
+
+      <button type="submit" class="btn btn-dark">Submit</button>
+    </form>
+
+
+  </div>
+</div>
+<%- include('partials/footer') %>

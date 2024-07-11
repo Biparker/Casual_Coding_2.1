@@ -1,0 +1,23 @@
+<%- include('partials/header') %>
+
+<div class="jumbotron text-center">
+  <div class="container">
+    <h2 class="display-3">Casual Coding Project(s)</h2>
+
+    <% usersWithProjects.forEach(function(user) { %>
+      <div class="card">
+        <h3>Owner: <%= user.email %></h3>
+        <p>Project: <%= user.project %></p>
+        <p>Percent Done: <%= user.percent_done %></p>
+        <p>Description: <%= user.description %></p>
+      </div>
+    <% }); %>
+
+    <hr>
+  
+    <a class="btn btn-light btn-lg" href="/logout" role="button">Log Out</a>
+    <a class="btn btn-dark btn-lg" href="/submit" role="button">Submit a Project</a>
+  </div>
+</div>
+
+<%- include('partials/footer') %>
