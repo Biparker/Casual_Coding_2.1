@@ -1,0 +1,42 @@
+<%- include('partials/header') %>
+
+    
+     <div class="jumbotron text-center">
+      <div class="container">
+       <h2 class="display-3">Casual Coding Project(s)</h2>
+        <% usersWithProjects.forEach(function(user) { %>
+         <%}) %>
+             <table style ="width: 90%" >
+          <thead>
+            <tr>
+              <th>Owner</th>
+              <th>Project</th>
+              <th>Percent_done</th>
+              <th>Description</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <% usersWithProjects.forEach(function(user) { %>
+              <tr>
+                <td><%= user.email %></td>
+                <td><%= user.project %></td>
+                <td><%= user.percent_done %></td>
+                <td><%= user.description %></td>
+                
+              </tr>
+            <% }); %>
+    
+          </tbody>
+        </table>
+    
+    
+        <hr>
+        
+        <a class="btn btn-light btn-lg" href="/logout" role="button">Log Out</a>
+        <a class="btn btn-dark btn-lg" href="/submit" role="button">Submit a Project</a>
+      </div>
+    </div>
+    
+
+<%- include('partials/footer') %>
