@@ -9,10 +9,12 @@
              <table style ="width: 90%" >
           <thead>
             <tr>
-              <th>Owner</th>
-              <th>Project</th>
-              <th>Percent_done</th>
-              <th>Description</th>
+              <th>Owner Email</th>
+              <th>Project Name</th>
+              <th>Percent Completed</th>
+              <th>Revise Project</th>
+              <th>Delete Project</th>
+
               
             </tr>
           </thead>
@@ -22,8 +24,12 @@
                 <td><%= user.email %></td>
                 <td><%= user.project %></td>
                 <td><%= user.percent_done %></td>
-                <td><%= user.description %></td>
-                
+                <td>
+                  <a href="/edit/<%= user._id %>">Edit</a>
+                </td>
+                <td>
+                  <a href="/delete/<%= user._id %>">Delete</a>
+                </td>
               </tr>
             <% }); %>
     
