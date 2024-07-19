@@ -27,12 +27,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-
-mongoose.connect('mongodb://mongo:Fg6Be6eEg5fH3532AE6hB5GE3FF5dDg-@mongodb.railway.internal:27017', { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('Connected to MongoDB...'))
-  .catch(err => console.error('Could not connect to MongoDB...', err));
-
+mongoose.connect("mongodb://localhost:27017/userDB");
 
 const userSchema = new mongoose.Schema({
     email: String,
@@ -50,7 +45,6 @@ passport.use(User.createStrategy());
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-
 
 app.get("/", function(req, res) {
     res.render("register");
@@ -105,8 +99,44 @@ app.get("/logout", function(req, res) {
     res.redirect("/");
   });
    
+  app.get("/edit/:id", function(req, res) {
+    User.findById(req.params.id)
+      .then(foundUser => {
+        if (foundUser) {
+          res.render("edit", { user: foundUser });
+        } else {
+          res.status(404).send("User not found");
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).send("Internal Server Error");
+      });
+  });
+  
+          
+  app.get("/delete/:id", function(req, res) {
+    const userId = req.params.id;
  
-      
+    // Validate user ID (optional)
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).send("Invalid user ID format");
+    }
+ 
+    User.findByIdAndDelete(userId)
+      .then(deletedUser => {
+        if (!deletedUser) {
+          return res.status(404).send("User not found");
+        }
+        res.send("Project deleted successfully");
+      })
+      .catch(err => {
+        console.error(err);
+        res.status(500).send("Internal Server Error");
+      });
+  });   
+ 
+   
 app.post("/register", function(req, res) {
    
     User.register({username: req.body.username}, req.body.password, function(err, user) {
@@ -142,9 +172,8 @@ app.post("/login", function(req, res) {
    
   });
   
-  
-  
-  app.post("/submit", function (req, res) {
+
+app.post("/submit", function (req, res) {
     console.log(req.user);
     User.findById(req.user)
       .then(foundUser => {
@@ -164,18 +193,50 @@ app.post("/login", function(req, res) {
         console.log(err);
       });
   });
+   
+  app.post("/update/:id", function(req, res) {
+    User.findByIdAndUpdate(req.params.id, req.body, { new: true })
+      .then(updatedUser => {
+        if (updatedUser) {
+          res.redirect("/project_tables");
+        } else {
+          res.status(404).send("User not found");
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).send("Internal Server Error");
+      });
+  });
   
-/// app.listen(3000, function() {
-//    console.log("Server on Port 3000...");
-//  });
+  
 
 
+  // app.delete("/project/:id", function(req, res) {
+  //    const userId = req.params.userId;
+  
+  //    // Validate user ID (optional)
+  //    if (!mongoose.Types.ObjectId.isValid(userId)) {
+  //      return res.status(400).send("Invalid user ID format");
+  //    }
+  
+  //    User.findByIdAndDelete(userId)
+  //      .then(deletedUser => {
+  //        if (!deletedUser) {
+  //          return res.status(404).send("User not found");
+  //        }
+  //        res.send("Project deleted successfully");
+  //      })
+  //      .catch(err => {
+  //        console.error(err);
+  //        res.status(500).send("Internal Server Error");
+  //      });
+  //  });
+  
+  
 
+  
+app.listen(3000, function() {
+    console.log("Server on Port 3000...");
+  });
 
-// Use PORT provided in environment or default to 3000
-
-const port = process.env.PORT || 3000;
-// Listen on `port` and 0.0.0.0
-app.listen(port, "0.0.0.0", function () {
-  // ...
-});
