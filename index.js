@@ -211,32 +211,8 @@ app.post("/submit", function (req, res) {
   
   
 
-
-  // app.delete("/project/:id", function(req, res) {
-  //    const userId = req.params.userId;
   
-  //    // Validate user ID (optional)
-  //    if (!mongoose.Types.ObjectId.isValid(userId)) {
-  //      return res.status(400).send("Invalid user ID format");
-  //    }
-  
-  //    User.findByIdAndDelete(userId)
-  //      .then(deletedUser => {
-  //        if (!deletedUser) {
-  //          return res.status(404).send("User not found");
-  //        }
-  //        res.send("Project deleted successfully");
-  //      })
-  //      .catch(err => {
-  //        console.error(err);
-  //        res.status(500).send("Internal Server Error");
-  //      });
-  //  });
-  
-  
-
-  
- app.listen(3000, function() {
-     console.log("Server on Port 3000...");
-   });
+app.listen(3000, function() {
+    console.log("Server on Port 3000...");
+  });
 
