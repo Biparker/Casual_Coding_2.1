@@ -115,26 +115,26 @@ app.get("/logout", function(req, res) {
   });
   
           
-  app.get("/delete/:id", function(req, res) {
-    const userId = req.params.id;
+  // app.get("/delete/:id", function(req, res) {
+  //   const userId = req.params.id;
  
-    // Validate user ID (optional)
-    if (!mongoose.Types.ObjectId.isValid(userId)) {
-      return res.status(400).send("Invalid user ID format");
-    }
+  //   // Validate user ID (optional)
+  //   if (!mongoose.Types.ObjectId.isValid(userId)) {
+  //     return res.status(400).send("Invalid user ID format");
+  //   }
  
-    User.findByIdAndDelete(userId)
-      .then(deletedUser => {
-        if (!deletedUser) {
-          return res.status(404).send("User not found");
-        }
-        res.send("Project deleted successfully");
-      })
-      .catch(err => {
-        console.error(err);
-        res.status(500).send("Internal Server Error");
-      });
-  });   
+  //   User.findByIdAndDelete(userId)
+  //     .then(deletedUser => {
+  //       if (!deletedUser) {
+  //         return res.status(404).send("User not found");
+  //       }
+  //       res.send("Project deleted successfully");
+  //     })
+  //     .catch(err => {
+  //       console.error(err);
+  //       res.status(500).send("Internal Server Error");
+  //     });
+  // });   
  
    
 app.post("/register", function(req, res) {
