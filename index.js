@@ -27,7 +27,13 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb://localhost:27017/userDB");
+// mongoose.connect("mongodb://localhost:27017/userDB");
+mongoose.connect('mongodb://mongo:Fg6Be6eEg5fH3532AE6hB5GE3FF5dDg-@mongodb.railway.internal:27017', { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('Connected to MongoDB...'))
+  .catch(err => console.error('Could not connect to MongoDB...', err));
+
+
+
 
 const userSchema = new mongoose.Schema({
     email: String,
@@ -212,7 +218,17 @@ app.post("/submit", function (req, res) {
   
 
   
-app.listen(3000, function() {
-    console.log("Server on Port 3000...");
-  });
+// app.listen(3000, function() {
+//    console.log("Server on Port 3000...");
+//  });
+
+
+const port = process.env.PORT || 3000;
+// Listen on `port` and 0.0.0.0
+app.listen(port, "0.0.0.0", function () {
+  // ...
+});
+
+
+
 
